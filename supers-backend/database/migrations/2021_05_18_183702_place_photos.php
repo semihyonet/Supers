@@ -15,8 +15,11 @@ class PlacePhotos extends Migration
     {
         Schema::create('place_photos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('place_id')->references('id')->on('places');
+            $table->integer('place_id');
+            $table->char('directory', 100);
             $table->smallInteger("order", false, true);
+            $table->foreign('place_id')->references('id')->on('places');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class PlacePhotos extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('place_photos');
     }
 }

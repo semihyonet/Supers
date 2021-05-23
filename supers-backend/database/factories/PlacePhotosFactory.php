@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Place;
 use Faker\Generator as Faker;
 
 /*
@@ -13,10 +13,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
+$factory->define(App\Models\PlacePhotos::class, function (Faker $faker) {
     return [
-        'name' => $faker->name(),
-        'email' => $faker->email(),
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'place_id' => Place::inRandomOrder()->first()->id,
+        'directory' => $faker->imageUrl(),
+        'order' => $faker->randomDigitNotNull()
     ];
 });

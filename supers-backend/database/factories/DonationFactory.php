@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use App\Models\Place;
 use Faker\Generator as Faker;
 
 /*
@@ -13,10 +15,13 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
+$factory->define(App\Models\Donation::class, function (Faker $faker) {
     return [
-        'name' => $faker->name(),
-        'email' => $faker->email(),
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'money' => $faker->numberBetween(10, 100)*10,
+        'currency' => 'USD',
+        'user_id' => User::inRandomOrder()->first(),
+        // User::all()->random()->id,
+        'place_id' => Place::inRandomOrder()->first(),
+        // Place::all()->random()->id
     ];
 });

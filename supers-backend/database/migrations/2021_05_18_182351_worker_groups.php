@@ -15,9 +15,14 @@ class WorkerGroups extends Migration
     {
         Schema::create('worker_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('worker_id');
+            $table->integer('partner_id');
+            $table->integer('leader_id'); // Person authorized to check on these people
+            $table->integer('place_id');
+
+            $table->foreign('worker_id')->references('id')->on('users');
             $table->foreign('partner_id')->references('id')->on('users');
-            $table->foreign('leader_id')->references('id')->on('users'); // Person authorized to check on these people
+            $table->foreign('leader_id')->references('id')->on('users');
             $table->foreign('place_id')->references('id')->on('places');
         });
     }
@@ -29,6 +34,6 @@ class WorkerGroups extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('worker_groups');
     }
 }
