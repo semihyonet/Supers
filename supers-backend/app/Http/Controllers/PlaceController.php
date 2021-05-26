@@ -17,13 +17,4 @@ class PlaceController extends Controller
     {
         return new PlacesResource(Place::find($place));
     }
-    public function store()
-    {
-    }
-    public function update()
-    {
-    }
-    public function delete()
-    {
-    }
 }

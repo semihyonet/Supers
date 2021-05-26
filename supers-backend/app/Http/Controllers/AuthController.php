@@ -36,7 +36,8 @@ class AuthController extends Controller
 
     public function signup()
     {
-        $credentials = request(['name','email', 'password']);
+        $credentials = request(['email', 'password']);
+        $credentials["name"] = "user";
         if (User::where('email', $credentials['email'])->first() == null) {
             $user = new User;
             $user->email = $credentials["email"];
