@@ -15,14 +15,17 @@ class Workers extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('place_id')->references('id')->on('places');
+            $table->integer('user_id');
+            $table->integer('place_id');
             $table->boolean('is_volunteer');
             $table->date('date');
             $table->boolean('is_leader');
             $table->boolean('attended');
             $table->boolean('work_started');
             $table->boolean('work_ended');
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('place_id')->references('id')->on('places');
         });
     }
 
@@ -33,6 +36,6 @@ class Workers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('workers');
     }
 }

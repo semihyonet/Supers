@@ -13,13 +13,16 @@ class EarnedMoney extends Migration
      */
     public function up()
     {
-        Schema::create('earned_money', function (Blueprint $table) {
+        Schema::create('salaries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('worker_id')->references('id')->on('workers');
+            $table->integer('user_id');
+            $table->integer('worker_id');
             $table->integer("money", false, true);
             $table->char('currency', 5);
             $table->boolean('is_paid');
+            
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('worker_id')->references('id')->on('workers');
         });
     }
 
@@ -30,6 +33,6 @@ class EarnedMoney extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('salaries');
     }
 }

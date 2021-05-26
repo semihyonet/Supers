@@ -39,4 +39,12 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+    protected $routeMiddleware = [
+        'cors' => \App\Http\Middleware\Cors::class
+    ];
+    protected $middlewareGroups = [
+    'cors' => \App\Http\Middleware\Cors::class
+        
+    ];
 }

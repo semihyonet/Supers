@@ -15,11 +15,14 @@ class UserPoints extends Migration
     {
         Schema::create('user_points', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('user_id');
             $table->smallInteger('star', false, true);
-            $table->foreign('reviewer_id')->references('id')->on('users');
-            $table->char('message', 300)->nullable();
+            $table->integer('reviewer_id');
+            $table->text('message')->nullable();
+            $table->integer('place_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('place_id')->references('id')->on('places');
+            $table->foreign('reviewer_id')->references('id')->on('users');
         });
     }
 
@@ -30,6 +33,6 @@ class UserPoints extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('user_points');
     }
 }
